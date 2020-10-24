@@ -1,0 +1,61 @@
+.form-container {
+	margin: 0 auto;
+	padding: 15px 20px;
+	width: 50vw;
+	height: 70vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	h1 {
+		font-size: 2rem;
+		text-align: center;
+	}
+}
+
+.error-input {
+	border: 1px solid red;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	label {
+		align-self: start;
+		margin-bottom: 0.3rem;
+	}
+}
+
+.error-msg {
+	color: red;
+}
+
+.ripple-button-login {
+	position: relative;
+	display: inline-block;
+	padding: 12px 36px;
+	margin: 10px;
+	color: #fff;
+	text-decoration: none;
+	letter-spacing: 2px;
+	font-size: 18px;
+	border-radius: 40px;
+	border: none;
+	overflow: hidden;
+	background: linear-gradient(
+		142deg,
+		rgba(213, 2, 2, 0.8578781854538691) 0%,
+		rgba(253, 190, 29, 0.9809782608695652) 58%,
+		rgba(255, 158, 0, 1) 90%
+	);
+	box-shadow: 2px 2px 5px #c8ced470;
+	transition: transform 0.2s ease-out;
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		transform: scale(0.97);
+	}
+}
