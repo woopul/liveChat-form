@@ -1,5 +1,5 @@
 import React from 'react';
-import LiveChatLogo from "../../assets/livechat_logo.svg";
+import LiveChatLogo from "../../assets/logo/livechat_logo.svg";
 import './formInfo.scss';
 
 const FormInfo = () => {

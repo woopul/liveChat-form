@@ -7,19 +7,20 @@ import "./loginForm.scss";
 
 const INITIAL_STATE = { email: "", password: "" };
 
-export default function LoginForm() {
+const LoginForm = () => {
 	const {
 		handleSubmit,
 		handleChange,
 		handleBlur,
-		values,
+		formData,
 		errors,
-    isSubmitting,
+		isSubmitting,
+		touched
 	} = useFormValidation(INITIAL_STATE, validateForm, authenticateUser);
 	const [authenticationError, setAuthenticationError] = useState(null);
-
+ 
 	async function authenticateUser() {
-		const user = values;
+		const user = formData;
 		try {
 			await login(user)
 				.then((res) => console.log(res))
@@ -32,7 +33,7 @@ export default function LoginForm() {
 			setAuthenticationError(err.message);
 		}
 	}
-
+	
 	return (
 		<div className="form-control-container">
 			<h1>Login to LiveChat</h1>
@@ -42,31 +43,27 @@ export default function LoginForm() {
 					name="email"
 					type="text"
           id="emailInput"
-					className={errors.email.length > 0 && "error-input"}
+					className={errors.email && "error-input"}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					value={values.email}
+					value={formData.email}
 				/>
-				{errors.email && <p className="error-msg">{errors.email}</p>}
+				{errors.email && (<p className="error-msg">{errors.email}</p>)}
 
 				<label htmlFor="passwordInput">password</label>
 				<input
 					name="password"
 					type="password"
           id="passwordInput"
-					className={errors.password.length > 0 && "error-input"}
+					className={errors.password && touched.password  && "error-input"}
 					onBlur={handleBlur}
 					onChange={handleChange}
-					value={values.password}
+					value={formData.password}
 				/>
-				{errors.password &&
-					errors.password.map((errMsg) => (
-						<p className="error-msg">{errMsg}</p>
-					))}
-				{/* <ButtonRipple /> */}
+				{errors.password && ( <p className="error-msg">{errors.password}</p> )}
 				<button
 					className="ripple-button-login"
-					disabled={isSubmitting}
+					disabled={Object.keys(errors).length ? "" : "disabled" }
 					type="submit"
 				>
 					Sign In
@@ -80,3 +77,5 @@ export default function LoginForm() {
 		</div>
 	);
 }
+
+export default LoginForm;

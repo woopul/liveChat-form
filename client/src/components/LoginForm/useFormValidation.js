@@ -1,42 +1,44 @@
 import { useState, useEffect } from "react";
 
 export default function useFormValidation(initialState, validate, authenticateUser) {
-	const [values, setValues] = useState(initialState);
-  const [errors, setErrors] = useState({ email: [], password: []});
+  const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
-  
+  const [touched, setTouched] = useState({});
+
   useEffect(() => {
-    if(isSubmitting) {
-      const noErrors = errors.email.length === 0 && errors.password.length === 0;
-      if(noErrors) {
-        authenticateUser();
-        setSubmitting(false);
-      } else {
-        setSubmitting(false)
-      }
-    }
-  },[errors])
+      const validationErrors = validate(formData, touched);
+      setErrors(validationErrors);
+  }, [formData]);
 
-	function handleChange(event) {
-    const { name, value } = event.target;
+  // useEffect(() => {
+  //   if (isSubmitting) {
+  //     const noErrors = errors.email.length === 0 && errors.password.length === 0;
+  //     if (noErrors) {
+  //       authenticateUser();
+  //       setSubmitting(false);
+  //     } else {
+  //       setSubmitting(false)
+  //     }
+  //   }
+  // }, [errors])
 
-		setValues({
-			...values,
-			[name]: value,
-		});
+  const handleChange = ({ target: { value, name } }) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   }
 
-  function handleBlur() {
-    const validationErrors = validate(values);
-    setErrors(validationErrors);
+  const handleBlur = ({ target: { value, name } }) => {
+    setTouched({ ...touched, [name]: true });
+    setFormData({...formData})
   }
-  
-  function handleSubmit(event) {
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const validationErrors = validate(values);
-    setErrors(validationErrors);
     setSubmitting(true);
   }
-  
-	return { handleSubmit, handleChange, handleBlur, values, errors, isSubmitting };
+
+  return { handleSubmit, handleChange, handleBlur, formData, errors, touched, isSubmitting };
 }

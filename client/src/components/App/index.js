@@ -3,7 +3,7 @@ import FormCard from '../FormCard';
 
 import './app.scss'
 
-function App() {
+const App = () => {
   return (
     <div className="main-container">
       <FormCard />

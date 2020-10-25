@@ -6,8 +6,8 @@ import LoginForm from '../LoginForm';
 const FormCard = () => {
   return (
     <div className="form-card-container">
-      <FormInfo />
       <LoginForm />
+      <FormInfo />
     </div>
   )
 }
