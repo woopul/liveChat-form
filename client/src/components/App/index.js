@@ -1,13 +1,13 @@
 import React from 'react';
-import LoginForm from '../LoginForm';
+import FormCard from '../FormCard';
 
 import './app.scss'
 
 function App() {
   return (
-    <>
-      <LoginForm />
-    </>
+    <div className="main-container">
+      <FormCard />
+    </div>
   );
 };
 

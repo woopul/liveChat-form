@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ButtonRipple from "../ButtonRipple";
 
 import useFormValidation from "./useFormValidation";
 import validateForm from "./validateForm";
@@ -15,7 +14,7 @@ export default function LoginForm() {
 		handleBlur,
 		values,
 		errors,
-		isSubmitting,
+    isSubmitting,
 	} = useFormValidation(INITIAL_STATE, validateForm, authenticateUser);
 	const [authenticationError, setAuthenticationError] = useState(null);
 
@@ -35,12 +34,14 @@ export default function LoginForm() {
 	}
 
 	return (
-		<div className="form-container">
+		<div className="form-control-container">
 			<h1>Login to LiveChat</h1>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="email">email</label>
+				<label htmlFor="emailInput">email</label>
 				<input
 					name="email"
+					type="text"
+          id="emailInput"
 					className={errors.email.length > 0 && "error-input"}
 					onChange={handleChange}
 					onBlur={handleBlur}
@@ -48,10 +49,11 @@ export default function LoginForm() {
 				/>
 				{errors.email && <p className="error-msg">{errors.email}</p>}
 
-				<label htmlFor="password">password</label>
+				<label htmlFor="passwordInput">password</label>
 				<input
 					name="password"
 					type="password"
+          id="passwordInput"
 					className={errors.password.length > 0 && "error-input"}
 					onBlur={handleBlur}
 					onChange={handleChange}

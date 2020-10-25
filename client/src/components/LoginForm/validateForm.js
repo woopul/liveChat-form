@@ -11,7 +11,6 @@ export default function validateForm(values) {
 		errors.email.push("Invalid email address");
   }
 
-  console.log('VALIDATION', values)
   //password validation
   if (!values.password) {
     errors.password.push("Please enter a password");
@@ -28,8 +27,6 @@ export default function validateForm(values) {
     if(!/(?=.*\d)/g.test(values.password)) {
        errors.password.push("Password must contain at least one digit")
     } 
-    //TODO: at least one small letter | one big letter | one number 
-    // if(values.){}
   }
 	return errors;
 }
