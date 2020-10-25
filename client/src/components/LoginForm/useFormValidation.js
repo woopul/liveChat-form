@@ -7,7 +7,7 @@ export default function useFormValidation(initialState, validate, authenticateUs
   const [touched, setTouched] = useState({});
 
   useEffect(() => {
-      const validationErrors = validate(formData, touched);
+      const validationErrors = validate(formData);
       setErrors(validationErrors);
   }, [formData]);
 
@@ -36,9 +36,11 @@ export default function useFormValidation(initialState, validate, authenticateUs
   }
 
   const handleSubmit = (event) => {
+    console.log("IN HANDLE SUBMIT")
     event.preventDefault();
     setSubmitting(true);
+    authenticateUser();
   }
 
-  return { handleSubmit, handleChange, handleBlur, formData, errors, touched, isSubmitting };
+  return { handleSubmit, handleChange, handleBlur, formData, errors, touched, isSubmitting, setSubmitting };
 }

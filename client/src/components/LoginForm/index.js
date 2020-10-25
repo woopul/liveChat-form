@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
+import Button from "../Button";
 import useFormValidation from "./useFormValidation";
 import validateForm from "./validateForm";
 import login from "../../api/mock";
+import TextInputConrol from '../TextInputControl';
 import "./loginForm.scss";
 
 const INITIAL_STATE = { email: "", password: "" };
@@ -15,10 +16,11 @@ const LoginForm = () => {
 		formData,
 		errors,
 		isSubmitting,
+		setSubmitting,
 		touched
 	} = useFormValidation(INITIAL_STATE, validateForm, authenticateUser);
 	const [authenticationError, setAuthenticationError] = useState(null);
- 
+
 	async function authenticateUser() {
 		const user = formData;
 		try {
@@ -27,10 +29,12 @@ const LoginForm = () => {
 				.catch((err) => {
 					console.log(err);
 					setAuthenticationError(err.message);
+					setSubmitting(false);
 				});
 		} catch (err) {
 			console.error("Auth error", err);
 			setAuthenticationError(err.message);
+			setSubmitting(false);
 		}
 	}
 	
@@ -38,36 +42,25 @@ const LoginForm = () => {
 		<div className="form-control-container">
 			<h1>Login to LiveChat</h1>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="emailInput">email</label>
-				<input
+				<TextInputConrol
 					name="email"
 					type="text"
-          id="emailInput"
-					className={errors.email && "error-input"}
-					onChange={handleChange}
-					onBlur={handleBlur}
+					handleChange={handleChange}
+					handleBlur={handleBlur}
 					value={formData.email}
+					errors={errors}
+					touched={touched}
 				/>
-				{errors.email && (<p className="error-msg">{errors.email}</p>)}
-
-				<label htmlFor="passwordInput">password</label>
-				<input
+				<TextInputConrol 
 					name="password"
 					type="password"
-          id="passwordInput"
-					className={errors.password && touched.password  && "error-input"}
-					onBlur={handleBlur}
-					onChange={handleChange}
+					handleChange={handleChange}
+					handleBlur={handleBlur}
 					value={formData.password}
+					errors={errors}
+					touched={touched}
 				/>
-				{errors.password && ( <p className="error-msg">{errors.password}</p> )}
-				<button
-					className="ripple-button-login"
-					disabled={Object.keys(errors).length ? "" : "disabled" }
-					type="submit"
-				>
-					Sign In
-				</button>
+				<Button disabled={Object.keys(errors).length ? "disabled" : ""} />
 
 				{isSubmitting && <p>CHECKING FOR USER</p>}
 				{authenticationError && (

@@ -1,0 +1,31 @@
+
+.form-button {
+	position: relative;
+	display: inline-block;
+	padding: 12px 36px;
+	margin: 30px;
+	color: #fff;
+	text-decoration: none;
+	letter-spacing: 2px;
+	font-size: 1rem;
+	border-radius: 40px;
+	border: none;
+	overflow: hidden;
+	background: linear-gradient(
+		135deg,
+		rgba(213, 115, 2, 0.8578781854538691) 0%,
+		rgba(242, 120, 52, 1) 42%,
+		rgba(255, 72, 0, 1) 96%
+	);
+	box-shadow: 2px 2px 5px #7d7d7da1;
+	transition: transform 0.2s ease-out;
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		transform: scale(0.97);
+	}
+	&:disabled {
+		opacity:(0.75);
+	}
+}
