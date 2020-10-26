@@ -3,6 +3,7 @@
 $background-primary: #e0e6ee;
 
 //MIXINS:
+  //hardcoded
 @mixin respond($breakpoint) {
   @if  $breakpoint == phone {
       @media only screen and (max-width: 37.5rem) {@content};  //600px
@@ -13,6 +14,10 @@ $background-primary: #e0e6ee;
   @if  $breakpoint == big-desktop {
       @media only screen and (min-width: 112.5rem) {@content};   //1800px 
   }
+}
+  //custom
+@mixin rwd($screen) {
+  @media only screen and (max-width: $screen+'px') {@content};
 }
 
 //RESET

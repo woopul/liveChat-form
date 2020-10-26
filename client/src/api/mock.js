@@ -4,10 +4,11 @@ export default (user) => new Promise((resolve, reject) => {
 			email: 'test@test.pl',
 			password: 'Password1',
 		};
-		if (user.emial === mockedUser.email && user.password === mockedUser.password) {
-			resolve({ message: "SUCCESS "});
+		if (user.email === mockedUser.email && user.password === mockedUser.password) {
+			resolve({ id: 1, isSignedIn: true });
 		} else {
-			reject({message: "USER IS NOT PRESENT"});
+			const message = user.email === mockedUser.email ? "Password not correct" : "User is not Present";
+			reject({isSignedIn: false, message});
 		}
-	}, 5000);
+	}, 1000);
 });

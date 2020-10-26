@@ -1,42 +1,36 @@
 import { useState, useEffect } from "react";
 
 export default function useFormValidation(initialState, validate, authenticateUser) {
-	const [values, setValues] = useState(initialState);
-  const [errors, setErrors] = useState({ email: [], password: []});
+  const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
-  
+  const [touched, setTouched] = useState({});
+
   useEffect(() => {
-    if(isSubmitting) {
-      const noErrors = errors.email.length === 0 && errors.password.length === 0;
-      if(noErrors) {
-        authenticateUser();
-        setSubmitting(false);
-      } else {
-        setSubmitting(false)
-      }
-    }
-  },[errors])
-
-	function handleChange(event) {
-    const { name, value } = event.target;
-
-		setValues({
-			...values,
-			[name]: value,
-		});
-  }
-
-  function handleBlur() {
-    const validationErrors = validate(values);
+    const validationErrors = validate(formData);
     setErrors(validationErrors);
+  }, [formData]);
+
+  const handleChange = ({ target: { type, value, name } }) => {
+    if (type === "checkbox") { setFormData(prevState=>({ ...prevState, [name]: !prevState[name] }))}
+    else {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   }
-  
-  function handleSubmit(event) {
-    event.preventDefault();
-    const validationErrors = validate(values);
-    setErrors(validationErrors);
-    setSubmitting(true);
-  }
-  
-	return { handleSubmit, handleChange, handleBlur, values, errors, isSubmitting };
+}
+
+const handleBlur = ({ target: { value, name } }) => {
+  setTouched({ ...touched, [name]: true });
+  setFormData({ ...formData })
+}
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  setSubmitting(true);
+  authenticateUser();
+}
+
+return { handleSubmit, handleChange, handleBlur, formData, errors, touched, isSubmitting, setSubmitting };
 }
