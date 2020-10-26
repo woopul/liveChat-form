@@ -5,22 +5,17 @@
 	display: flex;
 	flex-wrap: wrap-reverse;
   width: 50vw;
-  height: 60vh;
 	box-shadow: 0 0 20px 0px #57430185;
 	border-radius: 10px;
 	background-color: #fff;
 	margin: 0 auto;
-  padding: 24px 40px;
-
+  padding: 4%;
+  
   @include rwd(800) {
     width: 80vw;
-    height: 70vh;
   }
-}
 
-img.form-card-bg {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 60%;
+  @include rwd(505) {
+    width: 95vw;
+  }
 }

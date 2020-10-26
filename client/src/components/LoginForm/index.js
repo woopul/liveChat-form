@@ -6,9 +6,10 @@ import useFormValidation from "./useFormValidation";
 import validateForm from "./validateForm";
 import login from "../../api/mock";
 import TextInputConrol from '../TextInputControl';
+import Logo from "../../assets/logo/livechat_logo.svg";
 import "./loginForm.scss";
 
-const INITIAL_STATE = { email: "", password: "" };
+const INITIAL_STATE = { email: "", password: "", rememberMe: true };
 
 const LoginForm = ({ signIn }) => {
 	const {
@@ -25,32 +26,29 @@ const LoginForm = ({ signIn }) => {
 
 	async function authenticateUser() {
 		const user = formData;
-		console.log('validate with data', user)
 		try {
 			await login(user)
 				.then((res) => {
-					console.log(res);
 					signIn(res);
 				})
 				.catch((err) => {
 					setAuthenticationError(err.message);
 					setSubmitting(false);
-					resetForm()
+					resetAuthError()
 				});
 		} catch (err) {
-			console.error("Auth error", err);
 			setAuthenticationError(err.message);
 			setSubmitting(false);
 		}
 	}
 
-	const resetForm = () => {
+	const resetAuthError = () => {
 		setTimeout(() => setAuthenticationError(null), 5000)
 	}
 
 	return (
 		<div className="form-control-container">
-			<h1>Login to LiveChat</h1>
+			<h1>Login to <span className="company-title">LiveChat</span><img src={Logo} className="company-logo" /></h1>
 			<form onSubmit={handleSubmit}>
 				<TextInputConrol
 					name="email"
@@ -72,9 +70,9 @@ const LoginForm = ({ signIn }) => {
 				/>
 
 				<div className="button-container">
-					<label className="chk-container"> Remember Me
-						<input type="checkbox"/>
-						<span type="chkmark"/>
+					<label for='rememberMe' className="chk-container"> Remember Me
+						<input value={formData.rememberMe} checked={formData.rememberMe} onChange={handleChange} id='rememberMe' name="rememberMe" type="checkbox" />
+						<span className="checkmark" />
 					</label>
 					<Button
 						type="submit"

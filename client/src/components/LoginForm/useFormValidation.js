@@ -7,28 +7,30 @@ export default function useFormValidation(initialState, validate, authenticateUs
   const [touched, setTouched] = useState({});
 
   useEffect(() => {
-      const validationErrors = validate(formData);
-      setErrors(validationErrors);
+    const validationErrors = validate(formData);
+    setErrors(validationErrors);
   }, [formData]);
 
-  const handleChange = ({ target: { value, name } }) => {
+  const handleChange = ({ target: { type, value, name } }) => {
+    if (type === "checkbox") { setFormData(prevState=>({ ...prevState, [name]: !prevState[name] }))}
+    else {
     setFormData({
       ...formData,
       [name]: value,
     });
   }
+}
 
-  const handleBlur = ({ target: { value, name } }) => {
-    setTouched({ ...touched, [name]: true });
-    setFormData({...formData})
-  }
+const handleBlur = ({ target: { value, name } }) => {
+  setTouched({ ...touched, [name]: true });
+  setFormData({ ...formData })
+}
 
-  const handleSubmit = (event) => {
-    console.log("IN HANDLE SUBMIT")
-    event.preventDefault();
-    setSubmitting(true);
-    authenticateUser();
-  }
+const handleSubmit = (event) => {
+  event.preventDefault();
+  setSubmitting(true);
+  authenticateUser();
+}
 
-  return { handleSubmit, handleChange, handleBlur, formData, errors, touched, isSubmitting, setSubmitting };
+return { handleSubmit, handleChange, handleBlur, formData, errors, touched, isSubmitting, setSubmitting };
 }

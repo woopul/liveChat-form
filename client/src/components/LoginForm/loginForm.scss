@@ -1,4 +1,4 @@
-@import '../../styles/base';
+@import "../../styles/base";
 
 .form-control-container {
 	flex: 0 1 300px;
@@ -6,12 +6,35 @@
 		margin: 0 20px;
 		flex: 1 1 300px;
 	}
+	@include rwd(505) {
+		margin: 0 20px;
+		flex: 1 1 300px;
+	}
+
 	h1 {
 		font-size: 1.5rem;
 		text-align: center;
 		margin-bottom: 35px;
+
+		.company-title {
+			font-size: inherit;
+			@include rwd(1060) {
+				display: none;
+			}
+		}
+		.company-logo {
+			display: none;
+			@include rwd(1060) {
+				margin-left: 5px;
+				margin-top: 10px;
+				width: auto;
+				height: 1.5rem;
+				display: inline-block;
+			}
+		}
 	}
 }
+
 form {
 	display: flex;
 	flex-direction: column;
@@ -37,7 +60,7 @@ form {
 	color: #ff0000f0;
 }
 
-label[for="passwordInput"]{
+label[for="passwordInput"] {
 	margin-top: 20px;
 }
 
@@ -47,7 +70,74 @@ label[for="passwordInput"]{
 	justify-content: space-between;
 	margin-top: 40px;
 	width: 100%;
-	input[type="checkbox"]{
-		margin: 5px;
+	@include rwd(605) {
+		flex-direction: column;
+		margin-top: 25px;
 	}
+	.form-button {
+			@include rwd(605) {margin-top: 15px; width: 80%;}
+			@include rwd(800) {padding: 0 20% }
+	}
+	
 }
+
+.chk-container {
+	font-size: 0.8rem;
+	display: block;
+	position: relative;
+	padding-left: 25px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.chk-container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	border: 1px solid orange;
+}
+
+.chk-container:hover input ~ .checkmark {
+	background-color: rgba(255, 152, 55, 0.404);
+}
+
+.chk-container input:checked ~ .checkmark {
+	background-color: orange;
+}
+
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+.chk-container input:checked ~ .checkmark:after {
+	display: block;
+}
+
+.chk-container .checkmark:after {
+	left: 5px;
+	top: 1px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+
