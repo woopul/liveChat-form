@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/liveChat-form/static/css/main.940ab645.chunk.css",
+    "main.js": "/liveChat-form/static/js/main.42d72482.chunk.js",
+    "main.js.map": "/liveChat-form/static/js/main.42d72482.chunk.js.map",
+    "runtime-main.js": "/liveChat-form/static/js/runtime-main.ca4a36a0.js",
+    "runtime-main.js.map": "/liveChat-form/static/js/runtime-main.ca4a36a0.js.map",
+    "static/js/2.a1384be7.chunk.js": "/liveChat-form/static/js/2.a1384be7.chunk.js",
+    "static/js/2.a1384be7.chunk.js.map": "/liveChat-form/static/js/2.a1384be7.chunk.js.map",
+    "index.html": "/liveChat-form/index.html",
+    "precache-manifest.fc4a94c0c4cc6c4944848d71992f4d06.js": "/liveChat-form/precache-manifest.fc4a94c0c4cc6c4944848d71992f4d06.js",
+    "service-worker.js": "/liveChat-form/service-worker.js",
+    "static/css/main.940ab645.chunk.css.map": "/liveChat-form/static/css/main.940ab645.chunk.css.map",
+    "static/js/2.a1384be7.chunk.js.LICENSE.txt": "/liveChat-form/static/js/2.a1384be7.chunk.js.LICENSE.txt",
+    "static/media/app.scss": "/liveChat-form/static/media/bg.96e0ea17.jpg",
+    "static/media/check-mark.53bc8dd6.svg": "/liveChat-form/static/media/check-mark.53bc8dd6.svg",
+    "static/media/livechat_logo.svg": "/liveChat-form/static/media/livechat_logo.2e2e0c47.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ca4a36a0.js",
+    "static/js/2.a1384be7.chunk.js",
+    "static/css/main.940ab645.chunk.css",
+    "static/js/main.42d72482.chunk.js"
+  ]
+}
