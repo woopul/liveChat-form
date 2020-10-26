@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { signIn } from '../../actions';
 import Button from "../Button";
 import useFormValidation from "./useFormValidation";
 import validateForm from "./validateForm";
@@ -8,7 +10,7 @@ import "./loginForm.scss";
 
 const INITIAL_STATE = { email: "", password: "" };
 
-const LoginForm = () => {
+const LoginForm = ({ signIn }) => {
 	const {
 		handleSubmit,
 		handleChange,
@@ -23,13 +25,17 @@ const LoginForm = () => {
 
 	async function authenticateUser() {
 		const user = formData;
+		console.log('validate with data', user)
 		try {
 			await login(user)
-				.then((res) => console.log(res))
+				.then((res) => {
+					console.log(res);
+					signIn(res);
+				})
 				.catch((err) => {
-					console.log(err);
 					setAuthenticationError(err.message);
 					setSubmitting(false);
+					resetForm()
 				});
 		} catch (err) {
 			console.error("Auth error", err);
@@ -37,7 +43,11 @@ const LoginForm = () => {
 			setSubmitting(false);
 		}
 	}
-	
+
+	const resetForm = () => {
+		setTimeout(() => setAuthenticationError(null), 5000)
+	}
+
 	return (
 		<div className="form-control-container">
 			<h1>Login to LiveChat</h1>
@@ -51,7 +61,7 @@ const LoginForm = () => {
 					errors={errors}
 					touched={touched}
 				/>
-				<TextInputConrol 
+				<TextInputConrol
 					name="password"
 					type="password"
 					handleChange={handleChange}
@@ -60,9 +70,19 @@ const LoginForm = () => {
 					errors={errors}
 					touched={touched}
 				/>
-				<Button disabled={Object.keys(errors).length ? "disabled" : ""} />
 
-				{isSubmitting && <p>CHECKING FOR USER</p>}
+				<div className="button-container">
+					<label className="chk-container"> Remember Me
+						<input type="checkbox"/>
+						<span type="chkmark"/>
+					</label>
+					<Button
+						type="submit"
+						text="Sign In"
+						disabled={Object.keys(errors).length || isSubmitting ? "disabled" : ""}
+					/>
+				</div>
+
 				{authenticationError && (
 					<p className="error-msg">{authenticationError}</p>
 				)}
@@ -71,4 +91,4 @@ const LoginForm = () => {
 	);
 }
 
-export default LoginForm;
+export default connect(null, { signIn })(LoginForm);

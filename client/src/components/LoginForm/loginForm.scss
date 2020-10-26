@@ -1,49 +1,29 @@
+@import '../../styles/base';
+
 .form-control-container {
 	flex: 0 1 300px;
+	@include rwd(1060) {
+		margin: 0 20px;
+		flex: 1 1 300px;
+	}
 	h1 {
 		font-size: 1.5rem;
 		text-align: center;
 		margin-bottom: 35px;
 	}
 }
-
-input[type="text"],
-input[type="password"] {
-	font-size: 0.9rem;
-	line-height: 40px;
-	padding: 0 12px;
-	width: 270px;
-	border-radius: 40px;
-	border: none;
-	box-shadow: 0px 0px 20px 0px #e09220;
-	width: 100%;
-
-	&:focus {
-		outline: none;
-	}
-
-		&.error-input {
-		box-shadow: 0px 0px 15px 0px #e10000b3
-	}
-
-	&.correct-input {
-		box-shadow: 0px 0px 20px 0px #009f01b3;
-	}
-}
-
-label[for="passwordInput"]{
-	margin-top: 30px;
-}
-
 form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
 	label {
+		font-size: 0.8rem;
+	}
+	label[for="passwordInput"],
+	label[for="emailInput"] {
 		align-self: start;
 		margin-bottom: 0.3rem;
-		font-size: 0.8rem;
 		font-weight: 600;
 		margin-bottom: 10px;
 	}
@@ -57,33 +37,17 @@ form {
 	color: #ff0000f0;
 }
 
-// .ripple-button-login {
-// 	position: relative;
-// 	display: inline-block;
-// 	padding: 12px 36px;
-// 	margin: 30px;
-// 	color: #fff;
-// 	text-decoration: none;
-// 	letter-spacing: 2px;
-// 	font-size: 1rem;
-// 	border-radius: 40px;
-// 	border: none;
-// 	overflow: hidden;
-// 	background: linear-gradient(
-// 		135deg,
-// 		rgba(213, 115, 2, 0.8578781854538691) 0%,
-// 		rgba(242, 120, 52, 1) 42%,
-// 		rgba(255, 72, 0, 1) 96%
-// 	);
-// 	box-shadow: 2px 2px 5px #7d7d7da1;
-// 	transition: transform 0.2s ease-out;
-// 	&:focus {
-// 		outline: none;
-// 	}
-// 	&:active {
-// 		transform: scale(0.97);
-// 	}
-// 	&:disabled {
-// 		opacity:(0.75);
-// 	}
-// }
+label[for="passwordInput"]{
+	margin-top: 20px;
+}
+
+.button-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 40px;
+	width: 100%;
+	input[type="checkbox"]{
+		margin: 5px;
+	}
+}

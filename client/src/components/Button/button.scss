@@ -2,8 +2,8 @@
 .form-button {
 	position: relative;
 	display: inline-block;
-	padding: 12px 36px;
-	margin: 30px;
+	line-height: 45px;
+	padding: 0 2rem;
 	color: #fff;
 	text-decoration: none;
 	letter-spacing: 2px;
@@ -22,10 +22,14 @@
 	&:focus {
 		outline: none;
 	}
+	&:hover {
+		cursor: pointer;
+	}
 	&:active {
 		transform: scale(0.97);
 	}
 	&:disabled {
 		opacity:(0.75);
+		cursor: default;
 	}
 }

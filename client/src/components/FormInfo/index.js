@@ -6,6 +6,8 @@ const FormInfo = () => {
   return(
     <div className="form-info-container" >
       <img src={LiveChatLogo} alt=""/>
+      <p className="info-text">Understand Better</p>
+      <p className="info-text">Communicate Better</p>
     </div>
   )
 }

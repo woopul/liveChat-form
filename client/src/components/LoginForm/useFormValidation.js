@@ -11,18 +11,6 @@ export default function useFormValidation(initialState, validate, authenticateUs
       setErrors(validationErrors);
   }, [formData]);
 
-  // useEffect(() => {
-  //   if (isSubmitting) {
-  //     const noErrors = errors.email.length === 0 && errors.password.length === 0;
-  //     if (noErrors) {
-  //       authenticateUser();
-  //       setSubmitting(false);
-  //     } else {
-  //       setSubmitting(false)
-  //     }
-  //   }
-  // }, [errors])
-
   const handleChange = ({ target: { value, name } }) => {
     setFormData({
       ...formData,

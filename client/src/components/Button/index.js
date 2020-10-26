@@ -2,8 +2,8 @@ import React from 'react';
 
 import './button.scss'
 
-const Button = ({ disabled = false }) => {
-  return (<button disabled={disabled} type="submit" className="form-button">Sign In</button>)
+const Button = ({ disabled = false, text = 'Button', type = "button", onClick }) => {
+  return (<button type={type} disabled={disabled} onClick={onClick} className="form-button">{text}</button>)
 }
 
 export default Button;  

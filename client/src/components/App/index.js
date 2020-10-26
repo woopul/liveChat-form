@@ -1,12 +1,12 @@
 import React from 'react';
-import FormCard from '../FormCard';
+import ContentCard from '../ContentCard';
 
 import './app.scss'
 
 const App = () => {
   return (
     <div className="main-container">
-      <FormCard />
+      <ContentCard />
     </div>
   );
 };
